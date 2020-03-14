@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="TestNG">
+    <test name="avtoQA">
+        <classes>
+            <class name="com.github.e999or.lesson18.SimpleTest"/>
+        </classes>
+    </test>
+</suite>
+
