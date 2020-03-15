@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -19,7 +20,11 @@ public class SimpleTest {
         webDriver = new ChromeDriver();
         LOG.info("Before ComplexTest method");
     }
-
+    @AfterMethod
+    public void afterTestMethod(){
+        webDriver.quit();
+        LOG.info("After test method");
+    }
 
     @Test
     public void shouldAnswerWithTrue() throws InterruptedException {
@@ -58,7 +63,6 @@ public class SimpleTest {
             webDriver.findElement(By.className("return")).click();
             alertNegativ.accept();
         }
-
         webDriver.findElement(By.id("table")).click();
         webDriver.findElement(By.id("customers")).click();
         webDriver.findElement(By.xpath("//td[text()='Island Trading']/parent:: node()/td/input")).click();
@@ -71,15 +75,5 @@ public class SimpleTest {
         WebElement returnToMenuTable = webDriver.findElement(By.linkText("Great! Return to menu"));
         Assert.assertEquals(returnToMenuTable.getAttribute("innerText"),"Great! Return to menu");
         returnToMenuTable.click();
-
-
-
-
-        Thread.sleep(10000);
-        webDriver.quit();
-
     }
-
-
-
 }
