@@ -20,8 +20,9 @@ public class SimpleTest {
         webDriver = new ChromeDriver();
         LOG.info("Before ComplexTest method");
     }
+
     @AfterMethod
-    public void afterTestMethod(){
+    public void afterTestMethod() {
         webDriver.quit();
         LOG.info("After test method");
     }
@@ -33,14 +34,14 @@ public class SimpleTest {
         webDriver.findElement(By.id("alerts")).click();
         webDriver.findElement(By.className("get")).click();
         Alert alert = webDriver.switchTo().alert();
-        String [] getPassword = alert.getText().split(":");
+        String[] getPassword = alert.getText().split(":");
         String noSpacePassword = getPassword[1].replaceAll(" ", "");
         alert.accept();
         webDriver.findElement(By.className("set")).click();
         alert.sendKeys(noSpacePassword);
         alert.accept();
         WebElement great = webDriver.findElement(By.xpath("//label"));
-        Assert.assertEquals(great.getAttribute("innerText"),"Great!");
+        Assert.assertEquals(great.getAttribute("innerText"), "Great!");
         webDriver.findElement(By.className("return")).click();
         alert.accept();
 
@@ -49,20 +50,18 @@ public class SimpleTest {
         alert.accept();
         webDriver.findElement(By.className("set")).click();
         alert.sendKeys("&&&&&");
-        try{
-            webDriver.findElement(By.xpath("//label"));
-        }catch (UnhandledAlertException e){
-            webDriver.findElement(By.className("get")).click();
-            Alert alertNegativ = webDriver.switchTo().alert();
-            String [] getPasswordNegativ = alertNegativ.getText().split(":");
-            String noSpacePasswordNegativ = getPasswordNegativ[1].replaceAll(" ", "");
-            alertNegativ.accept();
-            webDriver.findElement(By.className("set")).click();
-            alertNegativ.sendKeys(noSpacePasswordNegativ);
-            alertNegativ.accept();
-            webDriver.findElement(By.className("return")).click();
-            alertNegativ.accept();
-        }
+
+        webDriver.findElement(By.xpath("//label"));
+        webDriver.findElement(By.className("get")).click();
+        Alert alertNegativ = webDriver.switchTo().alert();
+        String[] getPasswordNegativ = alertNegativ.getText().split(":");
+        String noSpacePasswordNegativ = getPasswordNegativ[1].replaceAll(" ", "");
+        alertNegativ.accept();
+        webDriver.findElement(By.className("set")).click();
+        alertNegativ.sendKeys(noSpacePasswordNegativ);
+        alertNegativ.accept();
+        webDriver.findElement(By.className("return")).click();
+        alertNegativ.accept();
         webDriver.findElement(By.id("table")).click();
         webDriver.findElement(By.id("customers")).click();
         webDriver.findElement(By.xpath("//td[text()='Island Trading']/parent:: node()/td/input")).click();
@@ -73,7 +72,7 @@ public class SimpleTest {
         webDriver.findElement(By.xpath("//input[@value='Add']")).click();
 
         WebElement returnToMenuTable = webDriver.findElement(By.linkText("Great! Return to menu"));
-        Assert.assertEquals(returnToMenuTable.getAttribute("innerText"),"Great! Return to menu");
+        Assert.assertEquals(returnToMenuTable.getAttribute("innerText"), "Great! Return to menu");
         returnToMenuTable.click();
     }
 }
