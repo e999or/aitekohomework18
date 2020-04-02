@@ -64,6 +64,8 @@ public class SimpleTest {
         webDriver.findElement(By.className("set")).click();
         alertNegativ.sendKeys(noSpacePasswordNegativ);
         alertNegativ.accept();
+        WebElement great3 = webDriver.findElement(By.xpath("//label"));
+        Assert.assertEquals(great3.getAttribute("innerText"), "Great!");
         webDriver.findElement(By.className("return")).click();
         alertNegativ.accept();
 
