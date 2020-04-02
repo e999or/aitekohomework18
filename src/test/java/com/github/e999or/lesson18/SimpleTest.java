@@ -10,6 +10,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class SimpleTest {
     private static final Logger LOG = LoggerFactory.getLogger(SimpleTest.class);
     private WebDriver webDriver;
@@ -50,8 +52,10 @@ public class SimpleTest {
         alert.accept();
         webDriver.findElement(By.className("set")).click();
         alert.sendKeys("&&&&&");
+        alert.accept();
+        List<WebElement> great2 = webDriver.findElements(By.xpath("//label"));
+        Assert.assertEquals(great2.size(),0);
 
-        webDriver.findElement(By.xpath("//label"));
         webDriver.findElement(By.className("get")).click();
         Alert alertNegativ = webDriver.switchTo().alert();
         String[] getPasswordNegativ = alertNegativ.getText().split(":");
@@ -62,6 +66,7 @@ public class SimpleTest {
         alertNegativ.accept();
         webDriver.findElement(By.className("return")).click();
         alertNegativ.accept();
+
         webDriver.findElement(By.id("table")).click();
         webDriver.findElement(By.id("customers")).click();
         webDriver.findElement(By.xpath("//td[text()='Island Trading']/parent:: node()/td/input")).click();
